@@ -19,7 +19,7 @@ Before building the project, ensure the configuration file `gv_lib_conf.h` is pr
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/colinaudergon/gv_lib
    cd gv_lib
    ```
 2. Configure the project using cmake:
