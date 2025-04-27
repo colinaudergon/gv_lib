@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/CMakeFiles/picotoolBuild"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/CMakeFiles/picotoolBuild.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/CMakeFiles/picotoolBuild-complete.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule"
+		},
+		{
+			"file" : "/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"picotoolBuild"
+		],
+		"name" : "picotoolBuild"
+	}
+}

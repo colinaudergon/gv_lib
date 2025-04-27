@@ -1,0 +1,14 @@
+# Target labels
+ picotoolBuild
+# Source files and their labels
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/CMakeFiles/picotoolBuild
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/CMakeFiles/picotoolBuild.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/CMakeFiles/picotoolBuild-complete.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule
+/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/example/fat_fs_spi_sd_card/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule

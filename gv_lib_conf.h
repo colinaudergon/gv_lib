@@ -1,0 +1,11 @@
+#ifndef _GV_LIB_CONF_H_
+#define _GV_LIB_CONF_H_
+
+#define GV_LIB_USE_SSD1306
+
+#define GV_LIB_USE_ROTARY_ENCODER
+#define GV_LIB_USE_LED_PWM
+
+#define GV_LIB_USE_WAV_READER_SPI
+
+#endif // _GV_LIB_CONF_H_

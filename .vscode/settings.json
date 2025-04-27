@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "errno.h": "c",
+        "f_util.h": "c",
+        "ff.h": "c",
+        "stdlib.h": "c",
+        "file_handler.h": "c",
+        "wav_reader.h": "c",
+        "sd_card.h": "c",
+        "hw_config.h": "c",
+        "ratio": "c"
+    }
+}
