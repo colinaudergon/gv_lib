@@ -53,3 +53,6 @@ dkms.conf
 /build
 /gv_wav_reader/lib/no-OS-FatFS-SD-SPI-RPi-Pico
 /pico_gv_ui/lib/pico-ssd1306
+/.vscode
+/build
+/build/*
