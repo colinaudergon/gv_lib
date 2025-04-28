@@ -1,5 +1,0 @@
-/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/_deps/picotool/picotool
-/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/_deps/picotool/picotoolTargets.cmake
-/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/_deps/picotool/picotoolTargets-release.cmake
-/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/_deps/picotool/picotoolConfig.cmake
-/home/colin/1_DEV/SYNTH/1_Common_ressources/gv_lib/build/_deps/picotool/picotoolConfigVersion.cmake
