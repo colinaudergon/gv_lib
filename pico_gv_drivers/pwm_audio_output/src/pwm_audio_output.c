@@ -2,14 +2,13 @@
 
 #include <stdlib.h>
 #include <errno.h>
+#include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
 #include "hardware/irq.h"
 #include "hardware/dma.h"
 #include "hardware/clocks.h"
 #include "hardware/structs/clocks.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 #include "../pwm_audio_logger/pwm_audio_logger.h"
 
@@ -57,10 +56,8 @@ pwm_audio_driver_t *pwm_audio_create_driver(uint gpio_output, float sample_freq,
     driver->clock_div = ((float)f_clk_sys * 1000.0f) / 254.0f / (float)driver->sample_freq / (float)driver->repetion_rate;
     PWM_AUDIO_LOG_DEBUG("Clock div: %f\n", driver->clock_div);
 
-    // uint32_t single_sample = 0;
     driver->single_sample = 0;
     driver->single_sample_ptr = &driver->single_sample;
-    // uint32_t *single_sample_ptr = &single_sample;
 
     return driver;
 }
@@ -159,71 +156,6 @@ int pwm_audio_init(pwm_audio_driver_t *driver, dma_irq_cb_t dma_irq_cb)
     return 0;
 }
 
-// pwm_audio_driver_t *pwm_audio_init(uint gpio_output, float sample_freq, float repetion_rate, size_t buffer_size, dma_irq_cb_t dma_irq_cb)
-// {
-
-//     gpio_set_function(driver->gpio_output, GPIO_FUNC_PWM);
-//     driver->pin_slice = pwm_gpio_to_slice_num(driver->gpio_output);
-//     driver->pin_chan = pwm_gpio_to_channel(driver->gpio_output);
-
-//     pwm_config config = pwm_get_default_config();
-//     pwm_config_set_clkdiv(&config, driver->clock_div);
-//     pwm_config_set_wrap(&config, 254);
-//     pwm_init(driver->pin_slice, &config, true);
-
-//     driver->pwm_dma_chan = dma_claim_unused_channel(true);
-//     driver->trigger_dma_chan = dma_claim_unused_channel(true);
-//     driver->sample_dma_chan = dma_claim_unused_channel(true);
-
-//     driver->pwm_dma_chan_config = dma_channel_get_default_config(driver->pwm_dma_chan);
-//     channel_config_set_transfer_data_size(&driver->pwm_dma_chan_config, DMA_SIZE_32);          // transfer 32 bits at a time
-//     channel_config_set_read_increment(&driver->pwm_dma_chan_config, false);                    // always read from the same address
-//     channel_config_set_write_increment(&driver->pwm_dma_chan_config, false);                   // always write to the same address
-//     channel_config_set_chain_to(&driver->pwm_dma_chan_config, driver->sample_dma_chan);        // trigger sample DMA channel when done
-//     channel_config_set_dreq(&driver->pwm_dma_chan_config, DREQ_PWM_WRAP0 + driver->pin_slice); // transfer on PWM cycle end
-//     dma_channel_configure(driver->pwm_dma_chan,
-//                           &driver->pwm_dma_chan_config,
-//                           &pwm_hw->slice[driver->pin_slice].cc, // write to PWM slice CC register
-//                           &driver->single_sample,               // read from _singleSample
-//                           driver->repetion_rate,                // transfer once per desired sample repetition
-//                           false                                 // don't start yet
-//     );
-
-//     // setup trigger DMA channel
-//     driver->trigger_dma_chan_config = dma_channel_get_default_config(driver->trigger_dma_chan);
-//     channel_config_set_transfer_data_size(&driver->trigger_dma_chan_config, DMA_SIZE_32);          // transfer 32-bits at a time
-//     channel_config_set_read_increment(&driver->trigger_dma_chan_config, false);                    // always read from the same address
-//     channel_config_set_write_increment(&driver->trigger_dma_chan_config, false);                   // always write to the same address
-//     channel_config_set_dreq(&driver->trigger_dma_chan_config, DREQ_PWM_WRAP0 + driver->pin_slice); // transfer on PWM cycle end
-//     dma_channel_configure(driver->trigger_dma_chan,
-//                           &driver->trigger_dma_chan_config,
-//                           &dma_hw->ch[driver->pwm_dma_chan].al3_read_addr_trig, // write to PWM DMA channel read address trigger
-//                           &driver->single_sample_ptr,                           // read from location containing the address of _singleSample
-//                           driver->repetion_rate * driver->buffer_size,          // trigger once per audio sample per repetition rate
-//                           false                                                 // don't start yet
-//     );
-
-//     dma_channel_set_irq1_enabled(driver->trigger_dma_chan, true); // fire interrupt when trigger DMA channel is done
-//     irq_set_exclusive_handler(DMA_IRQ_1, dma_irq_cb);
-//     // irq_set_exclusive_handler(DMA_IRQ_1, dmaHandler_internal);
-//     irq_set_enabled(DMA_IRQ_1, true);
-
-//     // setup sample DMA channel
-//     driver->sample_dma_chan_config = dma_channel_get_default_config(driver->sample_dma_chan);
-//     channel_config_set_transfer_data_size(&driver->sample_dma_chan_config, DMA_SIZE_8); // transfer 8-bits at a time
-//     channel_config_set_read_increment(&driver->sample_dma_chan_config, true);           // increment read address to go through audio buffer
-//     channel_config_set_write_increment(&driver->sample_dma_chan_config, false);         // always write to the same address
-//     dma_channel_configure(driver->sample_dma_chan,
-//                           &driver->sample_dma_chan_config,
-//                           (char *)&driver->single_sample + 2 * driver->pin_chan, // write to _singleSample
-//                                                                                  //   &audio_buffers[0][0],                        // read from audio buffer
-//                           &driver->buffer_0[0],                                  // read from audio buffer
-//                           1,                                                     // only do one transfer (once per PWM DMA completion due to chaining)
-//                           false                                                  // don't start yet
-//     );
-
-// }
-
 int pwm_audio_start(pwm_audio_driver_t *driver)
 {
     if (driver == NULL)
@@ -231,9 +163,8 @@ int pwm_audio_start(pwm_audio_driver_t *driver)
         return -EINVAL;
     }
 
-    irq_set_enabled(DMA_IRQ_1, true);
+    irq_set_enabled(DMA_IRQ_0, true);
     dma_channel_start(driver->trigger_dma_chan);
-    // pwm_set_enabled(driver->pin_slice, true);
     return 0;
 }
 
@@ -244,7 +175,7 @@ int pwm_audio_stop(pwm_audio_driver_t *driver)
         return -EINVAL;
     }
 
-    irq_set_enabled(DMA_IRQ_1, false);
+    irq_set_enabled(DMA_IRQ_0, false);
     return 0;
 }
 

@@ -1,4 +1,5 @@
 #include "pico/stdlib.h"
+#include "hardware/clocks.h"
 #include "pwm_audio_output.h"
 #include "logger.h"
 
@@ -10,30 +11,30 @@
 void dmaHandler(void);
 pwm_audio_driver_t *driver;
 
-#define REPETITION_RATE 1
+#define REPETITION_RATE 4
 
 void bufer_cb(uint8_t *to_fill_buffer, uint8_t *free_buffer, size_t size)
 {
-    if (to_fill_buffer == NULL || freeBuffer == NULL)
+    if (to_fill_buffer == NULL || free_buffer == NULL)
     {
         LOG_ERROR("BUFFER NULL");
         return;
     }
 
-    static int cnt = 0;
+    static int counter = 0; // Tracks the current position in the audio_buffer
 
     for (int i = 0; i < size; i++)
     {
-        int counter = cnt * size + i;
+        // Copy audio data to the buffer
+        to_fill_buffer[i] = audio_buffer[counter];
+
+        // Increment the counter and wrap around if it exceeds AUDIO_SAMPLES
+        counter++;
         if (counter >= AUDIO_SAMPLES)
         {
-            cnt = 0;
-            counter = 0;
+            counter = 0; // Loop back to the beginning of audio_buffer
         }
-
-        to_fill_buffer[i] = free_buffer[counter];
     }
-    cnt++;
 
     pwm_audio_IRQ_ack(driver);
 }
@@ -41,15 +42,19 @@ void bufer_cb(uint8_t *to_fill_buffer, uint8_t *free_buffer, size_t size)
 int main(void)
 {
     stdio_init_all();
+    set_sys_clock_khz(176000, true);
+
+    sleep_ms(1000);
     int err;
-    
-    driver = pwm_audio_create_driver(AUDIO_PIN, 44100.f, 1, BUFFER_SIZE);
+
+    driver = pwm_audio_create_driver(AUDIO_PIN, 44100, 4.f, BUFFER_SIZE);
     if (driver == NULL)
     {
         LOG_ERROR("Failed to create driver");
     }
-    
+
     sleep_ms(5000);
+
     err = pwm_audio_init(driver, dmaHandler);
     if (err < 0)
     {
@@ -68,6 +73,15 @@ int main(void)
             pwm_audio_start(driver);
         }
     }
+    
+    
+    // sleep_ms(1000);
+    // sleep_ms(1000);
+    // sleep_ms(1000);
+    // sleep_ms(1000);
+    // sleep_ms(1000);
+    // LOG_INF("Changing clock speed");
+    // set_sys_clock_khz(100000, true);
 
     while (1)
     {

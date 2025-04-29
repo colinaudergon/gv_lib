@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD 11)
 add_executable(pwm_audio_output_example main.c)
 
 target_link_libraries(pwm_audio_output_example
-PRIVATE gv_lib hardware_adc)
+PRIVATE gv_lib hardware_adc hardware_clocks)
 
 
 pico_add_extra_outputs(pwm_audio_output_example)
