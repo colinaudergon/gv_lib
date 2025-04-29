@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.19)
 
 project(pico_gv_drivers)
 
@@ -40,6 +40,47 @@ if(USE_GV_LIB)
         list(APPEND PICO_GV_DRIVERS_DEP ${PICO_GV_LED_PWM_DEP})
     endif()#USE_LED_PWM
 
+    if(USE_PWM_OUTPUT_AUDIO)
+
+    include(${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/cmake/test_config.cmake)
+
+    message(STATUS "pico_gv_drivers: USE_PWM_OUTPUT_AUDIO is enabled")
+    
+    if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/conf/pwm_output_audio_conf.h.in)
+        message(STATUS "pico_gv_drivers: pwm audio output used")
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/conf/pwm_output_audio_conf.h)
+            file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/conf/pwm_output_audio_conf)
+        endif()
+    else()
+        message(FATAL_ERROR "pwm_output_audio_conf.h.in not found in ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/conf/")
+    endif()
+
+
+    gen_config_pwm_audio_fn()
+
+    # test_pwm_audio_config_fn()
+
+    # configure_file(
+    #     ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/conf/pwm_output_audio_conf.h.in
+    #     ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/conf/pwm_output_audio_conf.h
+    # )
+
+    set(PWM_AUDIO_OUTPUT_SRC ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/src/pwm_audio_output.c)
+    set(PWM_AUDIO_OUTPUT_INC ${CMAKE_CURRENT_SOURCE_DIR}/pwm_audio_output/include)
+    set(PWM_AUDIO_OUTPUT_DEP 
+    logger
+    hardware_dma 
+    hardware_pwm 
+    hardware_irq 
+    hardware_clocks 
+    hardware_structs
+    )
+
+    list(APPEND PICO_GV_DRIVERS_SRC ${PWM_AUDIO_OUTPUT_SRC})
+        list(APPEND PICO_GV_DRIVERS_INC ${PWM_AUDIO_OUTPUT_INC})
+        list(APPEND PICO_GV_DRIVERS_DEP ${PWM_AUDIO_OUTPUT_DEP})
+    
+        endif()#USE_PWM_AUDIO_OUTPUT
 
     # Only add the library if there are source files
     if(PICO_GV_DRIVERS_SRC)

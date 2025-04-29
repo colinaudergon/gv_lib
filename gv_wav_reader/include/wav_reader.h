@@ -9,7 +9,7 @@
 #include "file_handler.h"
 
 #define MAX_PATH_LENGTH 256
-
+#define WAV_FILE_DATA_BASE_ADDR 0
 typedef struct
 {
     char blockID[4];         // 4 bytes

@@ -7,12 +7,13 @@
 #include "ff.h"
 #include <errno.h>
 
+
+
 int main()
 {
     stdio_init_all();
     sleep_ms(2000);
-    printf("Helllooooo\n");
-
+    
     wav_file_reader_t reader;
     char *path = "/0.wav";
 
@@ -22,6 +23,7 @@ int main()
     {
         printf("Failed to init the wav file reader: %d\n",err);
     }
+
     directory_t *dir = file_handler_create_directory();
     if (dir == NULL)
     {
@@ -29,7 +31,6 @@ int main()
         return -1;
     }
 
-    
     file_handler_ls_dir_content("/",dir);
     
     // Destroy the directory and set the pointer to NULL
@@ -43,6 +44,7 @@ int main()
     {
         printf("Failed to open the wav file reader: %d\n",err);
     }
+    
     err = wav_reader_read_wav_header(&reader);
     if(err <0)
     {

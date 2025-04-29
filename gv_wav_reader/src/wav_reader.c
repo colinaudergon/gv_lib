@@ -24,44 +24,6 @@ static uint32_t to_little_endian_32(uint32_t value)
            ((value << 24) & 0xFF000000);
 }
 
-// static uint16_t read_2_bytes_from_start(FILE *file, uint32_t offset)
-
-#if 0
-static uint16_t read_2_bytes_from_start(FILE *file, uint32_t offset)
-{
-    if (file == NULL)
-    {
-        printf("Invalid argument");
-        return 0;
-    }
-
-    fseek(file, offset, SEEK_SET);
-    uint16_t val;
-    fread(&val, 2, 1, file);
-    return val;
-}
-
-static uint16_t read_2_bytes_from_start(FILE *file, uint32_t offset)
-{
-        if (file == NULL)
-    {
-        printf("Invalid argument");
-        return 0;
-    }
-
-    f_lseek(file, offset);
-    uint16_t val;
-    UINT br;
-    f_read(file, &val, 2, &br);
-
-    if (br < 2)
-    {
-            printf("End of file\n");
-        }
-        return val;
-    }
-#endif
-
 static uint32_t read_4_bytes_from_start(FIL *file, uint32_t offset)
 {
     if (file == NULL)
@@ -136,18 +98,9 @@ int wav_file_reader_init(wav_file_reader_t *reader, const char *filepath)
     memcpy(reader->filepath, filepath, strlen(filepath));
     sd_card_t *pSD = sd_get_by_num(0);
     FRESULT fr = f_mount(&pSD->fatfs, pSD->pcName, 1);
-    // if (!sd_init_driver())
-    // {
-    //     printf("ERROR: Could not initialize SD card\r\n");
-    //     return -1;
-    // }
 
-    // FRESULT err = f_mount(reader->fs, "0:", 1);
     if (fr != FR_OK)
-    // if (err != FR_OK)
     {
-        // printf("ERROR: Could not mount filesystem. FATFS fields: fs_type=%d, id=%d\r\n",
-        //        reader->fs->fs_type, reader->fs->id);
         return -1;
     }
 
