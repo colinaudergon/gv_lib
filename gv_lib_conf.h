@@ -26,4 +26,6 @@
 
 #endif // GV_LIB_USE_PWM_OUTPUT_AUDIO
 
+#define GV_LIB_USE_LFSR 1
+
 #endif // _GV_LIB_CONF_H_

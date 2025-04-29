@@ -12,3 +12,7 @@ endif()
 if(USE_PWM_OUTPUT_AUDIO)
 add_subdirectory(pwm_audio_output)
 endif()
+
+if(USE_LFSR)
+add_subdirectory(lfsr)
+endif()

@@ -29,6 +29,8 @@ check_macro_defined_global(GV_LIB_USE_WAV_READER_SPI USE_WAV_READER_SPI)
 check_macro_defined_global(GV_LIB_USE_THREAD_HANDLER USE_THREAD_HANDLER)
 check_macro_defined_global(GV_LIB_USE_PWM_OUTPUT_AUDIO USE_PWM_OUTPUT_AUDIO)
 
+check_macro_defined_global(GV_LIB_USE_LFSR USE_LFSR)
+
 
 
 if(USE_LOGGER)
@@ -60,6 +62,15 @@ if(USE_THREAD_HANDLER)
     add_subdirectory(rp2040_thread_handler)
     list(APPEND CUSTOM_LIB_DEP rp2040_thread_handler)
 endif()
+
+
+if(USE_LFSR)
+    message(STATUS "Including lfsr")
+    add_subdirectory(gv_lfsr)
+    list(APPEND CUSTOM_LIB_DEP gv_lfsr)
+endif()
+
+
 
 add_library(gv_lib INTERFACE)
 
