@@ -1,0 +1,3 @@
+[submodule "pico_gv_drivers/i2s_driver/rp2040_i2s_example"]
+	path = pico_gv_drivers/i2s_driver/rp2040_i2s_example
+	url = https://github.com/colinaudergon/rp2040_i2s_example.git

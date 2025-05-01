@@ -16,3 +16,9 @@ endif()
 if(USE_LFSR)
 add_subdirectory(lfsr)
 endif()
+
+if(USE_I2S)
+add_subdirectory(i2s_example)
+endif()
+
+add_subdirectory(dsp)

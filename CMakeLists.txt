@@ -30,6 +30,7 @@ check_macro_defined_global(GV_LIB_USE_THREAD_HANDLER USE_THREAD_HANDLER)
 check_macro_defined_global(GV_LIB_USE_PWM_OUTPUT_AUDIO USE_PWM_OUTPUT_AUDIO)
 
 check_macro_defined_global(GV_LIB_USE_LFSR USE_LFSR)
+check_macro_defined_global(GV_LIB_USE_I2S USE_I2S)
 
 
 
@@ -45,7 +46,7 @@ if (USE_SSD1306)
     list(APPEND CUSTOM_LIB_DEP pico_gv_ui)
 endif()
 
-if (USE_LED_PWM OR USE_ROTARY_ENCODER OR USE_PWM_OUTPUT_AUDIO)
+if (USE_LED_PWM OR USE_ROTARY_ENCODER OR USE_PWM_OUTPUT_AUDIO OR USE_I2S)
     message(STATUS "Including pico_gv_drivers")
     add_subdirectory(pico_gv_drivers)
     list(APPEND CUSTOM_LIB_DEP pico_gv_drivers)
@@ -70,7 +71,8 @@ if(USE_LFSR)
     list(APPEND CUSTOM_LIB_DEP gv_lfsr)
 endif()
 
-
+add_subdirectory(gv_dsp)
+list(APPEND CUSTOM_LIB_DEP gv_dsp)
 
 add_library(gv_lib INTERFACE)
 

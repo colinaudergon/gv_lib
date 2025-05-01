@@ -28,4 +28,6 @@
 
 #define GV_LIB_USE_LFSR 1
 
+#define GV_LIB_USE_I2S 0
+
 #endif // _GV_LIB_CONF_H_
